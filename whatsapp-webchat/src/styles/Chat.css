@@ -1,0 +1,89 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+    flex: 0.65;
+}
+.chat_header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+}
+.chat_headerInfo {
+    flex: 1; /* to provide a breathing room */
+    padding-left: 20px;
+}
+.chat_headerInfo h3 {
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+.chat_headerInfo p {
+    color: gray;
+}
+.chat_body {
+    flex: 1;
+    padding: 30px;
+    overflow-y: scroll;
+    background-repeat: repeat;
+    background-image: url('https://camo.githubusercontent.com/854a93c27d64274c4f8f5a0b6ec36ee1d053cfcd934eac6c63bed9eaef9764bd/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131306234303866303735642e706e67');
+    /* background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); */
+    background-position: center;
+}
+.chat_message {
+    background-color: #ffffff;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    position: relative;
+    margin-bottom: 30px;
+}
+.chat_receiver {
+    background-color: #dcf8c6;
+    margin-left: auto;
+}
+.chat_name {
+    position: absolute;
+    top: -16px;
+    font-weight: bolder;
+    color: rgb(44, 44, 44);
+}
+.chat_timestamp {
+    color: gray;
+    font-size: xx-small;
+    font-size: 12px;
+    margin-left: 10px;
+}
+.chat_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ededed;
+    height: 60px;
+    border-top: 1px solid lightgray;
+}
+.chat_footer form {
+    background-color: #ffffff;
+    padding: 8px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    margin: 0 15px 0 15px;
+}
+.chat_footer form input{
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+}
+.chat_footer form button{
+    background-color: transparent;
+    border: none;
+    font-size: large;
+    display: none;
+}
+.chat_footer .MuiSvgIcon-root {
+    color: gray;
+    padding: 10px;
+}
