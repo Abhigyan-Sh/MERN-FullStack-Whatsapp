@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# insights
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Process:
+- `npm init` (though not necessary)
+- `npm i express mongoose pusher`
+created `index.js`
 
-## Available Scripts
+- created a new project on mongoDB
+- created a cluster then, (`0.0.0.0/0` , is the ip address used to allow all ip address to connect)
 
-In the project directory, you can run:
+Messages have to be even sent back since some changes ocurred in DB.
+- so firebase had this desired feature, and other websites having blogs might have been having `pusher` which reflects back data on frontend.
+- so mongoDB team thought to create some hook which could be pugged to `pusher` and they did so by creating `changeStream`.
+- so whenever data on mongoDB changes, mongoDB invokes `changeStream` which in turn invokes `pusher`(middleware) which then updates data on front-end.
 
-### `npm start`
+- to see changes on pusher site, we need to keep the 'Debug Console' open when we are making a request from postman.
+- so yeah we realize that pusher is getting turned on when it watches a change on mongoDB. We went from mongoDB to changeStream to pusher...
+- node is for production and nodemon is like for when we are in development.\
+- ES and commonjs(type: module or .mjs things)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- just for heruko deployment, plucking out all security checks **Don't use for production**
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Headers", "*")
+    next()
+})
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- using firebase following steps,
+- - went to firebase on left menu > settings > Firebase SDK snippet - Config (copy)
+- - using firebase for `authentication` and `hosting`
+- - websockets ?
+- - for real time functionality we will be using 1.mongoDB's change-stream 2. pusher
+so if there is some change in mongoDB's data then it's gonna fire-off `change-stream` and in return its gonna fire-off `pusher` which fires off axios or fetch on the front-end which will then refresh all the conversation.
+- - creating firebase.js and pasting Config in it from path specified above.
 
-### `npm test`
+### webSockets
+suppose a leadership board in a online multiplayer, now in here if we want the leadership board to be live then we may either.
+[x] tell them to refresh every now and then which will allow client to send a http request.
+[x] or we ourselves set a refresh timer
+[] or we could use webSockets, so for using it first we send a `connection request` and then only if the request gets accepted we send a `data request` since TCP got kicked-off so we can do this action now.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+> Structure of WebApp
+```
+.app(grid, 100vh, place-items center)
+  .app__body(flex margin-top:-50px 90vh 90wh box-shadow)
+    .sidebar(flex flex0.35 column)
+    .chat(flex flex0.65 column)
+```
+in chat component we have[^1].
+[^1]: header - Avatar, header_info, header_right
+[^2]: chatBody - background-image repeat position padding overflow-y flex:1
+  span for name
+  now comes the message
+  span for timestamp - {new Date().toUTCString()}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[^3]:  [chat messages got to the left by default and to shift them to right i used margin-left: auto;]

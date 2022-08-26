@@ -8,3 +8,7 @@ const firebaseConfig = {
     appId: "1:117790881366:web:218c9c25a2360dbc592df7",
     measurementId: "G-RT6WCVPW65"
 };
+/* 
+HAD TO BE USED FOR 
+authentication n hosting
+though, has not been used yet. */
