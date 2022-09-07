@@ -4,12 +4,15 @@ import mongoose from 'mongoose'
 import Messages from './dbMessages.js'
 import Pusher from 'pusher'
 // app config
+import dotenv from 'dotenv'
+dotenv.config()
+
 const app = express()
 const pusher = new Pusher({
-    appId: "1422056",
-    key: "d887d95278223676af1f",
-    secret: "67c8d1bfabc8f58635fa",
-    cluster: "ap2",
+    appId: process.env.APP_ID,
+    key: process.env.KEY,
+    secret: process.env.SECRET,
+    cluster: process.env.CLUSTER,
     useTLS: true
 });
 // middleware
